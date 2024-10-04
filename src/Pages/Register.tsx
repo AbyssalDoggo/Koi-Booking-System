@@ -1,5 +1,5 @@
 import React from "react";
-import 'src/index'
+
 const Register = () => {
   return (
     <div className="flex justify-center items-center h-screen w-screen">
@@ -83,7 +83,7 @@ const Register = () => {
               Already have an account.
               <a
                 className="text-blue-500 underline decoration-auto "
-                href="/Login.tsx"
+                href="/Login"
               >
                 Sign in
               </a>

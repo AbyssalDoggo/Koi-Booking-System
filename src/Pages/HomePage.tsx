@@ -11,7 +11,7 @@ const HomePage = () => {
   const data = [
     {
       name:'koifish 1 ',
-      img:'https://picsum.photos/seed/picsum/200'
+      img:'https://picsum.photos/seed/picsum/200',
     },
     {
       name:'koifish 2 ',
@@ -59,7 +59,7 @@ const HomePage = () => {
 
               <div className="flex flex-col text-black justify-center items-center gap-4 p-4">
                 <p className="text-xl font-semibold">{f.name}</p>
-                <button className="bg-blue-400 hover:bg-blue-600 text-lg px-6 py-1 rounded-xl">Read more</button>
+                <button className="bg-blue-400 hover:bg-blue-600 text-lg px-6 py-1 rounded-xl">Detail</button>
               </div>
             </div>
            ) )}

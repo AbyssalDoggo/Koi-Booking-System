@@ -1,6 +1,41 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 const Login = () => {
+  const [email, setEmail] = useState("vana@example.com");
+  const [password, setPassword] = useState("password123");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    if (!email || !password) {
+      setError("Email and password are required");
+      setIsLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.post("https://localhost:7043/Login", {
+        email,
+        password,
+      });
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response) {
+        setError(
+          err.response.data.message || "An error occurred during login."
+        );
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center h-screen w-screen">
       <div className="border-2 border-slate-500 rounded-md p-10 bg-stone-100">
@@ -8,34 +43,36 @@ const Login = () => {
           <h1 className="text-3xl grid"> SIGN IN</h1>
         </div>
         <div className="login-form">
-          <form>
-            <label>Username</label> <br />
+          <form onSubmit={handleSubmit}>
+            <label>Email</label> <br />
             <input
-              className="border-2 rounded-md w-full"
-              type="text"
-              id="username"
-              name="username"
+              className="border-2 rounded-md w-full p-2"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <br />
             <br />
             <label>Password </label> <br />
             <input
-              className="border-2 rounded-md w-full"
-              type="password"
-              id="password"
-              name="password"
+              className="border-2 rounded-md w-full p-2"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <br />
             <br />
+            {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
             <div className="text-center mb-3">
               <button
-                className="bg-blue-500 p-1 rounded-lg w-full text-white hover:bg-blue-700 "
+                className="bg-blue-500 p-2 rounded-lg w-full text-white hover:bg-blue-700 disabled:bg-blue-300"
                 type="submit"
+                disabled={isLoading}
               >
-                Login
+                {isLoading ? "Logging in..." : "Login"}
               </button>
               <a
-                className="text-blue-500 text-sm hover:underline hover:decoration-auto"
+                className="text-blue-500 text-sm hover:underline hover:decoration-auto mt-2 inline-block"
                 href="#"
               >
                 Forgot password?

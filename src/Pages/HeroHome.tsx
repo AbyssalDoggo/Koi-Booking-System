@@ -15,8 +15,8 @@ const HeroHome = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
       >
         <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm"></div>
 
-        <div className="relative z-10 p-8 text-center">
-          <h2 className="text-9xl font-bold text-white mb-4 font-stick font-extralight">
+        <div className="relative p-8 text-center">
+          <h2 className="text-9xl text-white mb-4 font-stick font-extralight">
             KOITO
           </h2>
           <p className="text-3xl text-white font-sans">

@@ -9,6 +9,7 @@ export default {
       colors: {
         grey: ["#4f4e4f"],
         wheat: ["#8d7e6c"],
+        dark: ["#24272f"],
       },
     },
   },

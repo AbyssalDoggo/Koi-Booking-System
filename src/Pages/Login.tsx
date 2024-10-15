@@ -19,10 +19,13 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("https://localhost:7043/Login", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://localhost:7043/api/Authentication/Login",
+        {
+          email,
+          password,
+        }
+      );
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(

@@ -1,20 +1,42 @@
 import React, { forwardRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import image from "../assets/Koi Farm.jpg";
 
-const mockFarms = [
-  { id: 1, name: "Sunny Meadows", image: image, slotOrder: 1 },
-  { id: 2, name: "Green Valley", image: image, slotOrder: 2 },
-  { id: 3, name: "Misty Mountains", image: image, slotOrder: 3 },
-  { id: 4, name: "Golden Fields", image: image, slotOrder: 4 },
+const mockTrips = [
+  {
+    id: 1,
+    name: "Sunny Meadows",
+    image: image,
+    slotOrder: 1,
+  },
+  {
+    id: 2,
+    name: "Green Valley",
+    image: image,
+    slotOrder: 2,
+  },
+  {
+    id: 3,
+    name: "Misty Mountains",
+    image: image,
+    slotOrder: 3,
+  },
+  {
+    id: 4,
+    name: "Golden Fields",
+    image: image,
+    slotOrder: 4,
+  },
 ];
 
-type Farm = (typeof mockFarms)[0];
+type Trip = (typeof mockTrips)[0];
 
-const FarmPanel: React.FC<{ farm: Farm }> = ({ farm }) => {
+const TripPanel: React.FC<{ trip: Trip }> = ({ trip }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log(`${farm.name}`);
+    navigate(`/trip/${trip.id}`);
   };
 
   return (
@@ -25,8 +47,8 @@ const FarmPanel: React.FC<{ farm: Farm }> = ({ farm }) => {
       onClick={handleClick}
     >
       <img
-        src={farm.image}
-        alt={farm.name}
+        src={trip.image}
+        alt={trip.name}
         className="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110"
       />
       <div
@@ -34,16 +56,16 @@ const FarmPanel: React.FC<{ farm: Farm }> = ({ farm }) => {
           isHovered ? "bg-opacity-0" : "bg-opacity-70"
         }`}
       >
-        <p className="text-lg mb-4">{farm.slotOrder}</p>
-        <h3 className="text-2xl font-semibold mb-2">{farm.name}</h3>
+        <p className="text-lg mb-4">Slot Order: {trip.slotOrder}</p>
+        <h3 className="text-2xl font-semibold mb-2">{trip.name}</h3>
       </div>
     </div>
   );
 };
 
-interface FarmHomeProps extends React.HTMLProps<HTMLDivElement> {}
+interface TripHomeProps extends React.HTMLProps<HTMLDivElement> {}
 
-const FarmHome = forwardRef<HTMLDivElement, FarmHomeProps>((props, ref) => {
+const TripHome = forwardRef<HTMLDivElement, TripHomeProps>((props, ref) => {
   return (
     <div
       ref={ref}
@@ -52,11 +74,11 @@ const FarmHome = forwardRef<HTMLDivElement, FarmHomeProps>((props, ref) => {
     >
       <div className="w-full">
         <h2 className="text-4xl font-bold text-white mb-8 text-center">
-          Our Farms
+          Our Trips
         </h2>
         <div className="flex flex-wrap justify-center items-stretch w-full">
-          {mockFarms.map((farm) => (
-            <FarmPanel key={farm.id} farm={farm} />
+          {mockTrips.map((trip) => (
+            <TripPanel key={trip.id} trip={trip} />
           ))}
         </div>
       </div>
@@ -64,6 +86,6 @@ const FarmHome = forwardRef<HTMLDivElement, FarmHomeProps>((props, ref) => {
   );
 });
 
-FarmHome.displayName = "FarmHome";
+TripHome.displayName = "TripHome";
 
-export default FarmHome;
+export default TripHome;

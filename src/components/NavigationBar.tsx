@@ -10,7 +10,7 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Login", href: "/login" },
   { label: "Register", href: "/register" },
-  { label: "Contact", href: "/" },
+  { label: "Farm", href: "/farm" },
 ];
 
 const NavigationBar = () => {

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import HeroHome from "./HeroHome";
 import IntroductionHome from "./IntroductionHome";
-import TourHome from "./TripHome";
+import FarmHome from "./FarmHome";
+import KoiHome from "./KoiHome";
 
 const SectionsHome = () => {
   const sectionsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -37,7 +38,8 @@ const SectionsHome = () => {
     >
       <HeroHome ref={(el) => (sectionsRef.current[0] = el)} />
       <IntroductionHome ref={(el) => (sectionsRef.current[1] = el)} />
-      <TourHome ref={(el) => (sectionsRef.current[2] = el)} />
+      <FarmHome ref={(el) => (sectionsRef.current[2] = el)} />
+      <KoiHome ref={(el) => (sectionsRef.current[3] = el)} />
     </div>
   );
 };

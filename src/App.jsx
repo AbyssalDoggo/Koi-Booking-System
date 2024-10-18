@@ -8,6 +8,8 @@ import TripDetailPage from "./pages/TripDetailPage.tsx";
 
 import KoiDetails from "./Pages/KoiDetails.tsx";
 import ProductsPage from "./Pages/ProductsPage.tsx";
+import Users from "./Pages/AdminPage/UsersManager.tsx";
+import OrderHistory from "./Pages/AdminPage/OrderHistory.tsx";
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route path="/trip/:id" element={<TripDetailPage />} />
         <Route path="/Products" element={<ProductsPage />} />
         <Route path="/Detail" element={<KoiDetails />} />
+        <Route path="/AdminUser" element={<Users/>}/>
+        <Route path="/AdminOrderHistory" element={<OrderHistory/>}/>
         
       </Routes>
     </>

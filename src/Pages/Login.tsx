@@ -26,6 +26,9 @@ const Login = () => {
           password,
         }
       );
+      const accessToken = response.data.Token;
+      localStorage.setItem("accessToken",accessToken);
+
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(

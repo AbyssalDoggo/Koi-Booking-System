@@ -1,20 +1,17 @@
-import React from "react";
-import slider from "react-slick/lib/slider";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick/lib/slider";
-import Footer from "../components/Footer";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import SectionsHome from "./SectionsHome";
 const HomePage = () => {
+  const [token, setToken] = useState("");
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
+  useEffect(() => {
+    const storedToken = localStorage.getItem("accessToken");
+    if (storedToken) {
+      setToken(storedToken);
+      console.log("Access token retrieved:", storedToken);
+    }
+  }, []);
+
   return (
     <>
       <NavigationBar />
@@ -24,6 +21,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
-

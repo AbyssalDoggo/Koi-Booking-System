@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image from "../assets/Koi Farm.jpg";
 
-const mockTrips = [
+const mockFarms = [
   {
     id: 1,
     name: "Sunny Meadows",
@@ -29,14 +29,14 @@ const mockTrips = [
   },
 ];
 
-type Trip = (typeof mockTrips)[0];
+type Farm = (typeof mockFarms)[0];
 
-const TripPanel: React.FC<{ trip: Trip }> = ({ trip }) => {
+const FarmPanel: React.FC<{ farm: Farm }> = ({ farm }) => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/trip/${trip.id}`);
+    navigate(`/trip/${farm.id}`);
   };
 
   return (
@@ -47,8 +47,8 @@ const TripPanel: React.FC<{ trip: Trip }> = ({ trip }) => {
       onClick={handleClick}
     >
       <img
-        src={trip.image}
-        alt={trip.name}
+        src={farm.image}
+        alt={farm.name}
         className="w-full h-full object-cover transition-transform duration-300 transform hover:scale-110"
       />
       <div
@@ -56,29 +56,29 @@ const TripPanel: React.FC<{ trip: Trip }> = ({ trip }) => {
           isHovered ? "bg-opacity-0" : "bg-opacity-70"
         }`}
       >
-        <p className="text-lg mb-4">Slot Order: {trip.slotOrder}</p>
-        <h3 className="text-2xl font-semibold mb-2">{trip.name}</h3>
+        <p className="text-lg mb-4">{farm.slotOrder}</p>
+        <h3 className="text-2xl font-semibold mb-2">{farm.name}</h3>
       </div>
     </div>
   );
 };
 
-interface TripHomeProps extends React.HTMLProps<HTMLDivElement> {}
+interface FarmHomeProps extends React.HTMLProps<HTMLDivElement> {}
 
-const TripHome = forwardRef<HTMLDivElement, TripHomeProps>((props, ref) => {
+const FarmHome = forwardRef<HTMLDivElement, FarmHomeProps>((props, ref) => {
   return (
     <div
       ref={ref}
-      className="min-h-screen flex items-center bg-dark-0 justify-center transition-all duration-1000 ease-in-out snap-start"
+      className="min-h-screen flex items-center bg-wheat-0 justify-center transition-all duration-1000 ease-in-out snap-start"
       {...props}
     >
       <div className="w-full">
         <h2 className="text-4xl font-bold text-white mb-8 text-center">
-          Our Trips
+          Our Farms
         </h2>
         <div className="flex flex-wrap justify-center items-stretch w-full">
-          {mockTrips.map((trip) => (
-            <TripPanel key={trip.id} trip={trip} />
+          {mockFarms.map((farm) => (
+            <FarmPanel key={farm.id} farm={farm} />
           ))}
         </div>
       </div>
@@ -86,6 +86,6 @@ const TripHome = forwardRef<HTMLDivElement, TripHomeProps>((props, ref) => {
   );
 });
 
-TripHome.displayName = "TripHome";
+FarmHome.displayName = "FarmHome";
 
-export default TripHome;
+export default FarmHome;

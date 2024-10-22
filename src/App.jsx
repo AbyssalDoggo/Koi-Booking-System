@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+
 import HomePage from "./pages/HomePage.tsx";
 import Login from "./pages/Login.tsx";
 import FarmDisplayPage from "./pages/FarmDisplay.tsx";
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
         <Route path="/farm/:id" element={<FarmDetailPage />} />
         <Route path="/farm" element={<FarmDisplayPage />} />
         <Route path="/book" element={<TripBooking />} />
@@ -49,6 +51,11 @@ const App = () => {
         <Route path="/tripBooking" element={<TripBooking />} />
 
         {/* Admin Routes */}
+
+        <Route path="/AdminUser" element={<Users/>}/>
+        <Route path="/AdminOrderHistory" element={<OrderHistory/>}/>
+        
+
       </Routes>
     </>
   );

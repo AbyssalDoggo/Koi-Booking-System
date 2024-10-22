@@ -21,6 +21,7 @@ const Login = () => {
     }
 
     try {
+
       const response = await axios.post("https://localhost:7043/Login", {
         email,
         password,
@@ -29,6 +30,7 @@ const Login = () => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userRole", response.data.User.RoleId);
       navigate(`/`);
+
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {
         setError(

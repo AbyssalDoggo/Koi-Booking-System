@@ -27,6 +27,7 @@ const Login = () => {
       });
       const accessToken = response.data.Token;
       localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userRole", response.data.User.RoleId);
       navigate(`/`);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import img from "../assets/Koi1.png";
 
-interface KoiFish {
+export interface KoiFish {
   KoiFishId: number;
   KoiFishVarietyId: number;
   FarmId: number;
@@ -21,6 +22,7 @@ interface KoiFish {
 const KoiDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [koi, setKoi] = useState<KoiFish | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchKoiDetail = async () => {
@@ -41,6 +43,10 @@ const KoiDetail: React.FC = () => {
 
   if (!koi) return <div className="text-center py-4">No Koi fish found</div>;
 
+  const addToCart = () => {
+    navigate("/koiCart");
+  };
+
   return (
     <div className="container mx-auto p-4">
       <Link
@@ -51,7 +57,7 @@ const KoiDetail: React.FC = () => {
       </Link>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <img
-          src={`/api/placeholder/${koi.KoiFishId}/800/400`}
+          src={img}
           alt={`Koi ${koi.KoiFishId}`}
           className="w-full h-64 object-cover"
         />
@@ -113,7 +119,10 @@ const KoiDetail: React.FC = () => {
               <p className="text-gray-600">{koi.Notes}</p>
             </div>
           )}
-          <button className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300">
+          <button
+            onClick={addToCart}
+            className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
+          >
             Add to Cart
           </button>
         </div>

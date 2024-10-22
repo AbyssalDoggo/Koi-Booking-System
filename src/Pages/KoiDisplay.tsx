@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import img from "../assets/Koi1.png";
 
 interface KoiFish {
   KoiFishId: number;
@@ -35,7 +36,9 @@ const KoiDisplay: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">Koi Fish Collection</h1>
+      <h1 className="text-3xl text-white font-bold mb-6">
+        Koi Fish Collection
+      </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {koiList.map((koi) => (
           <Link
@@ -45,7 +48,7 @@ const KoiDisplay: React.FC = () => {
           >
             <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <img
-                src={`/api/placeholder/${koi.KoiFishId}/300/200`}
+                src={img}
                 alt={`Koi ${koi.KoiFishId}`}
                 className="w-full h-48 object-cover"
               />
@@ -59,9 +62,7 @@ const KoiDisplay: React.FC = () => {
                 <p className="text-gray-600 mb-2">
                   Color: {koi.Color || "N/A"}
                 </p>
-                <p className="text-green-600 font-bold">
-                  Price: ${koi.Price.toFixed(2)}
-                </p>
+                <p className="text-green-600 font-bold">Price: ${koi.Price}</p>
                 {koi.IsAvailable ? (
                   <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full mt-2">
                     Available

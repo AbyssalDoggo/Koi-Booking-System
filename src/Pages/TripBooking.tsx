@@ -71,7 +71,6 @@ const TripBooking: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitting quote request:", quoteRequest);
     setIsSubmitted(true);
   };
 

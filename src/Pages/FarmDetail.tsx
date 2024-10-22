@@ -67,7 +67,7 @@ const FarmDetail: React.FC = () => {
               <strong>Established:</strong> {farmDetails.EstablishedYear}
             </p>
             <p>
-              <strong>Area Size:</strong> {farmDetails.AreaSize} hectares
+              <strong>Area Size:</strong> {farmDetails.AreaSize} hecta
             </p>
           </div>
           <div>
@@ -99,11 +99,11 @@ const FarmDetail: React.FC = () => {
         <div className="mt-6">
           <button
             onClick={() => {
-              navigate("/tripBooking");
+              navigate("/checkout");
             }}
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
           >
-            Book Trip
+            Book
           </button>
         </div>
       </div>

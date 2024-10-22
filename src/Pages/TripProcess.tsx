@@ -57,7 +57,6 @@ const TripProcess: React.FC = () => {
 
   const handlePaymentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Processing payment with method:", paymentMethod);
   };
 
   if (!quoteDetails) {

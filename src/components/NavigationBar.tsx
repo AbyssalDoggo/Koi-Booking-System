@@ -4,21 +4,27 @@ import { Menu, X } from "lucide-react";
 interface NavItem {
   label: string;
   href: string;
+  role?: string;
 }
 
 const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Login", href: "/login" },
-  { label: "Register", href: "/register" },
-  { label: "Book", href: "/book" },
-  { label: "Manage Quote", href: "/manageQuote" },
-  { label: "Profile", href: "/schedule" },
+  { label: "Book trip", href: "/farm", role: "1" },
+  { label: "Check fish", href: "/koi" },
+  { label: "Manage", href: "/manageQuote", role: "2" },
 ];
 
 const NavigationBar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const userRole = localStorage.getItem("userRole");
+
+  const filteredNavItems = navItems.filter((item) =>
+    item.role ? item.role === userRole : true
+  );
 
   return (
     <nav className="bg-transparent text-white fixed w-full top-0 z-50">
@@ -31,7 +37,7 @@ const NavigationBar = () => {
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item) => (
+              {filteredNavItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
@@ -55,7 +61,7 @@ const NavigationBar = () => {
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navItems.map((item) => (
+            {filteredNavItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}

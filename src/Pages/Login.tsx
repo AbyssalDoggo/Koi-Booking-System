@@ -1,11 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("vana@example.com");
   const [password, setPassword] = useState("password123");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,15 +21,15 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post(
-        "https://localhost:7043/api/Authentication/Login",
-        {
-          email,
-          password,
-        }
-      );
+
+      const response = await axios.post("https://localhost:7043/Login", {
+        email,
+        password,
+      });
       const accessToken = response.data.Token;
-      localStorage.setItem("accessToken",accessToken);
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("userRole", response.data.User.RoleId);
+      navigate(`/`);
 
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {

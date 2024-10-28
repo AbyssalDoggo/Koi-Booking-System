@@ -30,6 +30,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 Order History
               </a>
             </li>
+            <li>
+              <a href="/AdminKoiManager" className="block py-2 px-4 hover:bg-blue-700 rounded">
+                Koi Fish Manager
+              </a>
+            </li>
           </ul>
         </nav>
       </aside>

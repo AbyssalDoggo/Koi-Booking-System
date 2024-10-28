@@ -78,7 +78,7 @@ const OrderHistory: React.FC = () => {
 
         {/* Display Loading, Error, or Table */}
         {loading ? (
-          <p>Loading users...</p>
+          <p>Loading...</p>
         ) : error ? (
           <p className="text-red-500">{error}</p>
         ) : (

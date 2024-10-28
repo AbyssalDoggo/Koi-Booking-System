@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
+
 import HomePage from "./pages/HomePage.tsx";
 import Login from "./pages/Login.tsx";
 import FarmDisplayPage from "./pages/FarmDisplay.tsx";
@@ -17,6 +18,11 @@ import KoiCart from "./pages/KoiCart.tsx";
 import PrivateRoute from "./services/PrivateRoute.tsx";
 import RoleRoute from "./services/RoleRoute.tsx";
 import CheckOut from "./pages/CheckOut.tsx";
+import ProductsPage from "./Pages/ProductsPage.tsx";
+import Users from "./Pages/AdminPage/UsersManager.tsx";
+import OrderHistory from "./Pages/AdminPage/OrderHistory.tsx";
+import KoiFish from "./Pages/AdminPage/KoiFish.tsx";
+
 
 const App = () => {
   return (
@@ -54,6 +60,7 @@ const App = () => {
 
         <Route path="/AdminUser" element={<Users/>}/>
         <Route path="/AdminOrderHistory" element={<OrderHistory/>}/>
+        <Route path="/AdminKoiManager" element={<KoiFish/>}/>
         
 
       </Routes>

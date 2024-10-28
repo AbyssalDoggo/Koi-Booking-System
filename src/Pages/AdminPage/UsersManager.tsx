@@ -4,12 +4,20 @@ import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
 
 interface User {
-  UserId: number;        
-  UserName: string;      
-  Email: string;         
-  Address: string;       
+  UserId: number;   
+  FullName: string;     
+  UserName: string;
+  Password:string;      
+  Email: string;    
+  PhoneNumber: string;
+  BirthDate: string;     
+  Address: string;  
+  Gender: number;
+  ImageUser: string;
+  IsActive: boolean;
   CreatedDate: string;  
   RoleId: number;        
+  IsVerified: boolean;
 }
 
 const Users: React.FC = () => {
@@ -17,7 +25,6 @@ const Users: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -30,7 +37,7 @@ const Users: React.FC = () => {
       try {
         const response = await axios.get('https://localhost:7043/api/Users');
 
-        if (response.data.Status === 1 && Array.isArray(response.data.Data)) {
+        if (response.data.Status === 1) {
           setUsers(response.data.Data);
         } else {
           setError('Unexpected response format');
@@ -68,6 +75,25 @@ const Users: React.FC = () => {
   //   }
   // };
 
+  const handleToggleStatus = async (user: User) => {
+    const updatedUser = { ...user, IsActive: !user.IsActive };
+  
+    try {
+      const response = await axios.put(`https://localhost:7043/api/Users/${user.UserId}`, updatedUser);
+      
+      if (response.status == 0) {
+        setUsers(prevUsers => 
+          prevUsers.map(u => (u.UserId === user.UserId ? updatedUser : u))
+        );
+        alert('User verification status updated successfully!');
+      } else {
+        alert('Failed to update verification status');
+      }
+    } catch (error) {
+      console.error('Error updating user verification status:', error);
+      alert('An error occurred while updating the verification status');
+    }
+  };
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
@@ -151,10 +177,14 @@ const Users: React.FC = () => {
             <thead>
               <tr>
                 <th className="px-4 py-2 border-b-2">User ID</th>
-                <th className="px-4 py-2 border-b-2">Username</th>
+                <th className="px-4 py-2 border-b-2">Full Name</th>
                 <th className="px-4 py-2 border-b-2">Email</th>
+                <th className="px-4 py-2 border-b-2">Phone number</th>
+                <th className="px-4 py-2 border-b-2">Birth Date</th>
                 <th className="px-4 py-2 border-b-2">Address</th>
                 <th className="px-4 py-2 border-b-2">Created Date</th>
+                <th className="px-4 py-2 border-b-2">Status</th>
+                <th className="px-4 py-2 border-b-2">Role id</th>
                 <th className="px-4 py-2 border-b-2">Actions</th>
               </tr>
             </thead>
@@ -163,10 +193,23 @@ const Users: React.FC = () => {
                 filteredUsers.map(user => (
                   <tr key={user.UserId} className="hover:bg-gray-100">
                     <td className="border px-4 py-2">{user.UserId}</td>
-                    <td className="border px-4 py-2">{user.UserName}</td>
+                    <td className="border px-4 py-2">{user.FullName}</td>
                     <td className="border px-4 py-2">{user.Email}</td>
+                    <td className="border px-4 py-2">{user.PhoneNumber}</td>
+                    <td className="border px-4 py-2">{new Date(user.BirthDate).toLocaleString()}</td>
                     <td className="border px-4 py-2">{user.Address}</td>
                     <td className="border px-4 py-2">{new Date(user.CreatedDate).toLocaleString()}</td>
+                    <td className="border px-4 py-2">
+                    <label className="switch">
+                        <input
+                          type="checkbox"
+                          checked={!!user.IsActive}
+                          onChange={() => handleToggleStatus(user)}
+                        />
+                        <span className="slider round"></span>
+                      </label>
+                    </td>
+                    <td className="border px-4 py-2">{user.RoleId}</td>
                     <td className="border px-4 py-2">
                       <button onClick={() => handleEditClick(user)} className="bg-blue-500 text-white px-3 py-1 rounded mr-2 hover:bg-blue-600">
                         Edit

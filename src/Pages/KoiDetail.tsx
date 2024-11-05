@@ -49,12 +49,6 @@ const KoiDetail: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <Link
-        to="/koi"
-        className="text-blue-500 hover:underline mb-4 inline-block"
-      >
-        &larr; Back to Koi List
-      </Link>
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <img
           src={img}
@@ -119,12 +113,20 @@ const KoiDetail: React.FC = () => {
               <p className="text-gray-600">{koi.Notes}</p>
             </div>
           )}
-          <button
-            onClick={addToCart}
-            className="mt-6 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300"
-          >
-            Add to Cart
-          </button>
+          <div className="mt-8 flex space-x-4">
+            <button
+              onClick={addToCart}
+              className="bg-cyan-600 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg transition duration-200"
+            >
+              Add to Cart
+            </button>
+            <button
+              onClick={() => navigate(-1)}
+              className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg transition duration-200"
+            >
+              Go Back
+            </button>
+          </div>
         </div>
       </div>
     </div>

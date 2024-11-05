@@ -30,7 +30,6 @@ interface QuoteDetails {
   activitiesPrice: number;
   guidePrice: number;
   additionalFees: number;
-  discount: number;
 }
 
 const CreateQuote: React.FC = () => {
@@ -46,7 +45,6 @@ const CreateQuote: React.FC = () => {
     activitiesPrice: 0,
     guidePrice: 0,
     additionalFees: 0,
-    discount: 0,
   });
 
   useEffect(() => {
@@ -95,7 +93,6 @@ const CreateQuote: React.FC = () => {
       activitiesPrice,
       guidePrice,
       additionalFees,
-      discount,
     } = quoteDetails;
     const subtotal =
       accommodationPrice +
@@ -103,7 +100,7 @@ const CreateQuote: React.FC = () => {
       activitiesPrice +
       guidePrice +
       additionalFees;
-    return subtotal - discount;
+    return subtotal;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -250,17 +247,6 @@ const CreateQuote: React.FC = () => {
                 type="number"
                 name="additionalFees"
                 value={quoteDetails.additionalFees}
-                onChange={handleInputChange}
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-            <div>
-              <label className="block mb-1">Discount</label>
-              <input
-                type="number"
-                name="discount"
-                value={quoteDetails.discount}
                 onChange={handleInputChange}
                 className="w-full p-2 border rounded"
                 required

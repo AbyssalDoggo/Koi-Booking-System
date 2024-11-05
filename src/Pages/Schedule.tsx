@@ -7,7 +7,7 @@ interface Quote {
   departureDate: string;
   returnDate: string;
   totalPrice: number;
-  status: "Pending" | "Accepted" | "Rejected";
+  status: "Pending" | "Waiting for instructions" | "Organized";
 }
 
 const Schedule: React.FC = () => {
@@ -15,8 +15,6 @@ const Schedule: React.FC = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
 
   useEffect(() => {
-    // In a real application, you would fetch the quotes from an API
-    // For this example, we'll use mock data
     const mockQuotes: Quote[] = [
       {
         id: 1,
@@ -32,7 +30,15 @@ const Schedule: React.FC = () => {
         departureDate: "2024-07-10",
         returnDate: "2024-07-20",
         totalPrice: 3800,
-        status: "Accepted",
+        status: "Waiting for instructions",
+      },
+      {
+        id: 3,
+        destination: "Niigata Farm",
+        departureDate: "2024-07-10",
+        returnDate: "2024-07-20",
+        totalPrice: 4000,
+        status: "Organized",
       },
     ];
 
@@ -62,11 +68,11 @@ const Schedule: React.FC = () => {
             </p>
             <p
               className={`mt-2 inline-block px-2 py-1 rounded-full text-sm ${
-                quote.status === "Accepted"
+                quote.status === "Organized"
                   ? "bg-green-200 text-green-800"
-                  : quote.status === "Rejected"
-                  ? "bg-red-200 text-red-800"
-                  : "bg-yellow-200 text-yellow-800"
+                  : quote.status === "Waiting for instructions"
+                  ? "bg-yellow-200 text-yellow-800"
+                  : "bg-gray-200 text-black"
               }`}
             >
               {quote.status}

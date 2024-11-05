@@ -8,11 +8,12 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/" },
   { label: "Login", href: "/login" },
-  { label: "Book trip", href: "/farm", role: "1" },
-  { label: "Check fish", href: "/koi" },
+  { label: "Book trip", href: "/farm ", role: "1" },
+  { label: "Manage schedule", href: "/schedule ", role: "1" },
+  { label: "Check fish", href: "/koi", role: "1" },
   { label: "Manage", href: "/manageQuote", role: "2" },
+  { label: "Admin", href: "/AdminUser", role: "2" },
 ];
 
 const NavigationBar = () => {

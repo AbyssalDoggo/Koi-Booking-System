@@ -87,6 +87,12 @@ const TripBooking: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-lg transition duration-200"
+      >
+        Go Back
+      </button>
       <h1 className="text-2xl text-white font-bold mb-4">Trip Quote Request</h1>
       <form onSubmit={handleSubmit} className="space-y-6">
         <section className="bg-white p-4 rounded shadow">

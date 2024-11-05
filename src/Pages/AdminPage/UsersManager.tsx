@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminLayout from '../../components/AdminLayout';
+import { DatePicker } from 'rsuite';
+
 
 interface User {
-  UserId: number;   
+  UserId: string;   
   FullName: string;     
   UserName: string;
   Password:string;      
@@ -26,6 +28,8 @@ const Users: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isCreateUserModalOpen, setIsCreateUserModalOpen] = useState<boolean>(false);
+  const [newUser, setNewUser] = useState<User | null>(null);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
@@ -53,27 +57,38 @@ const Users: React.FC = () => {
     fetchUsers();
   }, []);
 
-  // const handleDelete = (userId: number) => {
-  //   const apiUrl = `https://localhost:7043/api/Users/${userId}`;
-  
-  //   const confirmMessage = `Are you sure you want to delete user ${userId}?`;
-  
-  //   if (window.confirm(confirmMessage)) {
-  //     axios.delete(apiUrl)
-  //       .then(response => {
-  //         if (response.status === 200) {
-  //           // Remove the user from the state
-  //           setUsers(users.filter(user => user.UserId !== userId));
-  //           console.log(`User  ${userId} deleted successfully`);
-  //         } else {
-  //           console.error(`Error deleting user ${userId}`);
-  //         }
-  //       })
-  //       .catch(error => {
-  //         console.error(`Error deleting user ${userId}: ${error.message}`);
-  //       });
-  //   }
-  // };
+  const handleCreateUserClick = () => {
+    setNewUser({
+      UserId:'' , FullName: '', UserName: '', Password: '', Email: '', PhoneNumber: '', BirthDate: '',
+      Address: '', Gender: 0, ImageUser: '', IsActive: false, CreatedDate: '', RoleId: 0, IsVerified: false
+    });
+    setIsCreateUserModalOpen(true);
+  };
+
+  const handleCreateUserClose = () => {
+    setIsCreateUserModalOpen(false);
+    setNewUser(null);
+  };
+
+  const handleCreateUserSave = async () => {
+    if (!newUser) return;
+
+    try {
+      const response = await axios.post('https://localhost:7043/api/Users', newUser);
+
+      if (response.status === 200) {
+        setUsers([...users, response.data]);
+        alert('User created successfully!');
+      } else {
+        alert('Failed to create user');
+      }
+    } catch (err) {
+      console.error('Error creating user:', err);
+      alert('An error occurred while creating the user');
+    } finally {
+      handleCreateUserClose();
+    }
+  };
 
   const handleToggleStatus = async (user: User) => {
     const updatedUser = { ...user, IsActive: !user.IsActive };
@@ -148,13 +163,17 @@ const Users: React.FC = () => {
     }
   };
 
+  
+
+  
+
   return (
     <AdminLayout>
       <div className="bg-white p-6 rounded shadow">
         <div className='flex justify-between mb-3 '>
         <h2 className="text-2xl font-semibold mb-4 ">Users Management</h2>
 
-        <button className='p-2 bg-blue-600 rounded text-white'> Create User </button>
+        <button onClick={handleCreateUserClick} className='p-2 bg-blue-600 rounded text-white'> Create User </button>
         </div>
         {/* Search Bar */}
         <div className="mb-4">
@@ -235,12 +254,31 @@ const Users: React.FC = () => {
               <h2 className="text-xl font-semibold mb-4">Edit User</h2>
 
               <div className="mb-4">
-                <label className="block text-sm font-medium">Username</label>
+                <label className="block text-sm font-medium">Full Name</label>
+                <input 
+                  type="text" 
+                  className="border p-2 w-full rounded" 
+                  value={editingUser.FullName} 
+                  onChange={(e) => setEditingUser({...editingUser, FullName: e.target.value})} 
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium">User Name</label>
                 <input 
                   type="text" 
                   className="border p-2 w-full rounded" 
                   value={editingUser.UserName} 
                   onChange={(e) => setEditingUser({...editingUser, UserName: e.target.value})} 
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Password</label>
+                <input 
+                  type="text" 
+                  className="border p-2 w-full rounded" 
+                  value={editingUser.Password} 
+                  onChange={(e) => setEditingUser({...editingUser, Password: e.target.value})} 
                 />
               </div>
 
@@ -255,12 +293,59 @@ const Users: React.FC = () => {
               </div>
 
               <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Gender</label>
+              <div className="flex items-center space-x-4">
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="1"
+                    checked={editingUser.Gender === 1}
+                    onChange={() => setEditingUser({...editingUser, Gender: 1})}
+                  />
+                  <span className="ml-2">Male</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="0"
+                    checked={editingUser.Gender === 0}
+                    onChange={() => setEditingUser({...editingUser, Gender: 0})}
+                  />
+                  <span className="ml-2">Female</span>
+                </label>
+              </div>
+            </div>
+
+
+             < div className="mb-4">
+                <label className="block text-sm font-medium">Role</label>
+                <input 
+                  type="email" 
+                  className="border p-2 w-full rounded" 
+                  value={editingUser.Email} 
+                  onChange={(e) => setEditingUser({...editingUser, Email: e.target.value})} 
+                />
+              </div>  
+
+              <div className="mb-4">
                 <label className="block text-sm font-medium">Address</label>
                 <input 
                   type="text" 
                   className="border p-2 w-full rounded" 
                   value={editingUser.Address} 
                   onChange={(e) => setEditingUser({...editingUser, Address: e.target.value})} 
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium">Phone Number</label>
+                <input 
+                  type="text" 
+                  className="border p-2 w-full rounded" 
+                  value={editingUser.PhoneNumber} 
+                  onChange={(e) => setEditingUser({...editingUser, PhoneNumber: e.target.value})} 
                 />
               </div>
 
@@ -277,6 +362,110 @@ const Users: React.FC = () => {
                   disabled={isSaving}
                 >
                   {isSaving ? 'Saving...' : 'Save'}
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+{isCreateUserModalOpen && newUser && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-6 rounded shadow-lg w-full max-w-lg">
+              <h2 className="text-xl font-semibold mb-4">Create New User</h2>
+
+    
+      <label className="block text-sm">Full Name</label>
+              <input 
+                type="text" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="Full Name" 
+                value={newUser.FullName}
+                onChange={(e) => setNewUser({...newUser, FullName: e.target.value})} 
+              />
+              <label className="block text-sm ">User Name</label>
+               <input 
+                type="text" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="UserName" 
+                value={newUser.UserName}
+                onChange={(e) => setNewUser({...newUser, UserName: e.target.value})} 
+              />
+              <label className="block text-sm">Password</label>
+               <input 
+                type="text" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="Password" 
+                value={newUser.Password}
+                onChange={(e) => setNewUser({...newUser, Password: e.target.value})} 
+              />
+              <label className="block text-sm  mb-2">Email</label>
+              <input 
+                type="email" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="Email" 
+                value={newUser.Email}
+                onChange={(e) => setNewUser({...newUser, Email: e.target.value})} 
+              />
+
+
+               <div className="mb-4">
+              <label className="block text-sm  mb-2">Gender</label>
+              <div className="flex items-center space-x-4">
+                
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="0"
+                    checked={newUser.Gender === 0}
+                    onChange={() => setNewUser({...newUser, Gender: 0})}
+                  />
+                  <span className="ml-2">Female</span>
+                </label>
+                <label className="flex items-center">
+                  <input
+                    type="radio"
+                    name="gender"
+                    value="1"
+                    checked={newUser.Gender === 1}
+                    onChange={() => setNewUser({...newUser, Gender: 1})}
+                  />
+                  <span className="ml-2">Male</span>
+                </label>
+              </div>
+            </div>
+            <label className="block text-sm ">Address</label>
+              <input 
+                type="text" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="Address" 
+                value={newUser.Address}
+                onChange={(e) => setNewUser({...newUser, Address: e.target.value})} 
+              />
+              <label className="block text-sm  ">Phone Number</label>
+              <input 
+                type="text" 
+                className="border border-black p-2 w-full rounded mb-4" 
+                placeholder="Phone Number" 
+                value={newUser.PhoneNumber}
+                onChange={(e) => setNewUser({...newUser, PhoneNumber: e.target.value})} 
+              />
+
+              <label className='block text-sm'>Birth</label>
+             {/* <DatePicker value={new Date(newUser.BirthDate)} onChangeCalendarDate={(e) => setNewUser({...newUser, BirthDate: e.getTimezoneOffset})}  className='rounded'></DatePicker> */}
+
+              <div className="flex justify-end">
+                <button 
+                  className="bg-gray-500 text-white px-4 py-2 rounded mr-2 hover:bg-gray-600"
+                  onClick={handleCreateUserClose}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                  onClick={handleCreateUserSave}
+                >
+                  Save
                 </button>
               </div>
             </div>

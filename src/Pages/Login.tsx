@@ -22,7 +22,7 @@ const Login = () => {
 
     try {
 
-      const response = await axios.post("https://localhost:7043/Login", {
+      const response = await axios.post("https://localhost:7043/Authentication/Login", {
         email,
         password,
       });

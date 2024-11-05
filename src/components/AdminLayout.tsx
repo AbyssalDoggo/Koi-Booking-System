@@ -16,11 +16,6 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         <nav className="flex-1 px-2 py-4">
           <ul className="space-y-2">
             <li>
-              <a href="/" className="block py-2 px-4 hover:bg-blue-700 rounded">
-                Dashboard
-              </a>
-            </li>
-            <li>
               <a href="/AdminUser" className="block py-2 px-4 hover:bg-blue-700 rounded">
                 Users
               </a>

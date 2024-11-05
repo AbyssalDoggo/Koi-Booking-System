@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("sirisz2003@gmail.com");
-  const [password, setPassword] = useState("123");
+  const [email, setEmail] = useState("vana@example.com");
+  const [password, setPassword] = useState("password123");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -66,7 +66,6 @@ const Login = () => {
             <input
               className="border-2 rounded-md w-full p-2"
               value={password}
-              type="password"
               onChange={(e) => setPassword(e.target.value)}
               required
             />

@@ -26,20 +26,9 @@ const OrderHistory: React.FC = () => {
           "https://localhost:7043/api/OrderHistories"
         );
 
-        // if (response.data.Status === 1 && Array.isArray(response.data.Data)) {
-        //   const mappedOrder: Order[] = response.data.Data.map((Order: any) => ({
-        //     orderId: Order.orderId,
-        //     customerId: Order.customerId,
-        //     koiId: Order.koiId,
-        //     tripId: Order.tripId,
-        //     orderDate: Order.orderDate,
-        //     price: Order.price,
-
-        //   }));
-
         setOrders(response.data.Data);
       } catch (err) {
-        setError("Failed to fetch users.");
+        setError("Failed to fetch orders.");
         console.error(err);
       } finally {
         setLoading(false);

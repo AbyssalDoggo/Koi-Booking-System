@@ -15,6 +15,7 @@ const OrderHistory: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -26,9 +27,20 @@ const OrderHistory: React.FC = () => {
           "https://localhost:7043/api/OrderHistories"
         );
 
+        // if (response.data.Status === 1 && Array.isArray(response.data.Data)) {
+        //   const mappedOrder: Order[] = response.data.Data.map((Order: any) => ({
+        //     orderId: Order.orderId,
+        //     customerId: Order.customerId,
+        //     koiId: Order.koiId,
+        //     tripId: Order.tripId,
+        //     orderDate: Order.orderDate,
+        //     price: Order.price,
+
+        //   }));
+
         setOrders(response.data.Data);
       } catch (err) {
-        setError("Failed to fetch orders.");
+        setError("Failed to fetch users.");
         console.error(err);
       } finally {
         setLoading(false);
@@ -44,7 +56,7 @@ const OrderHistory: React.FC = () => {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout userRole={userRole}>
       <div className="bg-white p-6 rounded shadow">
         <div className="flex justify-between mb-3 ">
           <h2 className="text-2xl font-semibold mb-4 ">Order History</h2>

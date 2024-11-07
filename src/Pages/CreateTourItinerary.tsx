@@ -23,7 +23,6 @@ interface TourItinerary {
 }
 
 const CreateTourItinerary: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [itinerary, setItinerary] = useState<TourItinerary>({
     meetingPoint: "",
@@ -115,7 +114,6 @@ const CreateTourItinerary: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitted itinerary:", itinerary);
     navigate(-1);
   };
 

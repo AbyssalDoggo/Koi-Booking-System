@@ -12,8 +12,9 @@ const navItems: NavItem[] = [
   { label: "Book trip", href: "/farm ", role: "1" },
   { label: "Manage schedule", href: "/schedule ", role: "1" },
   { label: "Check fish", href: "/koi", role: "1" },
-  { label: "Manage", href: "/manageQuote", role: "2" },
-  { label: "Admin", href: "/AdminUser", role: "2" },
+  { label: "Manage Quote", href: "/manageQuote", role: "2" },
+  { label: "Manage Itinerary", href: "/manageItinerary", role: "3" },
+  { label: "Admin", href: "/AdminUser", role: "8" },
 ];
 
 const NavigationBar = () => {

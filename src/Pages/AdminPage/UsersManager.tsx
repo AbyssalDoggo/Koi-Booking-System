@@ -28,6 +28,7 @@ const Users: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [isSaving, setIsSaving] = useState<boolean>(false);
+  const userRole = localStorage.getItem("userRole");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -167,7 +168,7 @@ const Users: React.FC = () => {
   };
 
   return (
-    <AdminLayout>
+    <AdminLayout userRole={userRole}>
       <div className="bg-white p-6 rounded shadow">
         <div className="flex justify-between mb-3 ">
           <h2 className="text-2xl font-semibold mb-4 ">Users Management</h2>

@@ -124,7 +124,7 @@ const KoiCart: React.FC = () => {
           <div className="mt-6 bg-white rounded-lg shadow-md p-4">
             <h2 className="text-2xl font-bold mb-2">Total: ${totalPrice}</h2>
             <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors duration-300">
-              Proceed to Checkout
+              Proceed to payment
             </button>
           </div>
         </>

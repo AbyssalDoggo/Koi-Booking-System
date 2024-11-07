@@ -1,38 +1,36 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
-import Login from "./pages/Login.tsx";
 import Register from "./pages/Register.tsx";
-import TripBooking from "./pages/TripBooking.tsx";
-import KoiDisplay from "./pages/KoiDisplay.tsx";
-import KoiDetail from "./pages/KoiDetail.tsx";
-import ManageQuote from "./pages/ManageQuote.tsx";
-import CreateQuote from "./pages/CreateQuote.tsx";
-import TripProcess from "./pages/TripProcess.tsx";
-import Schedule from "./pages/Schedule.tsx";
-import KoiCart from "./pages/KoiCart.tsx";
+import Login from "./Pages/Login.tsx";
 import PrivateRoute from "./services/PrivateRoute.tsx";
-import RoleRoute from "./services/RoleRoute.tsx";
-import CheckOut from "./pages/CheckOut.tsx";
-import Users from "./Pages/AdminPage/UsersManager.tsx";
-import OrderHistory from "./Pages/AdminPage/OrderHistory.tsx";
-import FarmDisplay from "./Pages/FarmDisplay.tsx";
-import FarmDetail from "./Pages/FarmDetail.tsx";
-import CreateTourItinerary from "./pages/CreateTourItinerary.tsx";
+import Profile from "./pages/Customer/Profile/Profile.jsx";
+import TripList from "./pages/Customer/Trip/TripList.jsx";
+import TripDetail from "./pages/Customer/Trip/TripDetail.jsx";
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/customer" element={<Profile />} />
+      <Route path="/trips" element={<TripList />} />
+      <Route path="/trips/:id" element={<TripDetail />} />
 
-        {/* Private Routes */}
+      {/* <Route
+        path="/customer"
+        element={
+          <PrivateRoute role="1">
+            <Profile />
+          </PrivateRoute>
+        }
+      /> */}
 
+      {/* {/* {/* Private Routes
         <Route
           path="/tripBooking"
-          element={<PrivateRoute element={<TripBooking />} />}
+          element={<PrivateRoute element={<ToursList />} />}
         />
         <Route
           path="/tripProcess/:id"
@@ -47,8 +45,8 @@ const App = () => {
           element={<PrivateRoute element={<FarmDisplay />} />}
         />
         <Route
-          path="/book"
-          element={<PrivateRoute element={<TripBooking />} />}
+          path="/book/:id"
+          element={<PrivateRoute element={<BookingForm />} />}
         />
         <Route
           path="/koi"
@@ -71,29 +69,42 @@ const App = () => {
           element={<PrivateRoute element={<CheckOut />} />}
         />
 
-        {/* Admin Routes - Role-based Access */}
+        <Route
+          path="/bookingForm/:tripId"
+          element={<PrivateRoute element={<BookingForm />} />}
+        />
+
         <Route
           path="/AdminUser"
-          element={<RoleRoute role="ADMIN" element={<Users />} />}
+          element={<RoleRoute role="8" element={<Users />} />}
         />
         <Route
           path="/AdminOrderHistory"
-          element={<RoleRoute role="ADMIN" element={<OrderHistory />} />}
+          element={<RoleRoute role="8" element={<OrderHistory />} />}
         />
         <Route
           path="/manageQuote"
           element={<PrivateRoute element={<ManageQuote />} />}
         />
         <Route
-          path="/createTour"
+          path="/manageItinerary"
+          element={<PrivateRoute element={<ManageItinerary />} />}
+        />
+        <Route
+          path="/createItinerary"
           element={<PrivateRoute element={<CreateTourItinerary />} />}
         />
         <Route
           path="/createQuote/:id"
           element={<PrivateRoute element={<CreateQuote />} />}
         />
-      </Routes>
-    </>
+
+        <Route
+          path="/salesDashboard"
+          element={<PrivateRoute element={<SalesStaffDashboard />} />}
+        />
+      //   */}
+    </Routes>
   );
 };
 

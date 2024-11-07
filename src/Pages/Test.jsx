@@ -1,5 +1,4 @@
 import React from "react";
-import DashboardLayout from "../components/Layout/Layout.jsx";
 
 const Test = () => {
   return (

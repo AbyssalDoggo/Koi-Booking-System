@@ -37,7 +37,7 @@ const KoiFish = () => {
     const [isSaving, setIsSaving] = useState<boolean>(false);
     const [isCreateKoiModalOpen, setIsCreateKoiModalOpen] = useState<boolean>(false);
     const [newKoi, setNewKoi] = useState<Koi | null>(null);
-    
+    const userRole = localStorage.getItem("userRole");
 
     useEffect(() => {
         const fetchKois = async () => {
@@ -178,7 +178,7 @@ const KoiFish = () => {
 
 
   return (
-    <AdminLayout>
+    <AdminLayout userRole={userRole}>
          <div className="bg-white p-6 rounded shadow">
         <div className='flex justify-between mb-3 '>
         <h2 className="text-2xl font-semibold mb-4 ">Koi Fish Management</h2>

@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminLayout = ({ children, userRole }) => {
   const sidebarLinks = {
@@ -23,14 +24,25 @@ const AdminLayout = ({ children, userRole }) => {
     ],
   };
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear token and user data from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    // Redirect to login page
+    navigate("/");
+  };
+
   const links = sidebarLinks[userRole] || [];
 
   return (
-    <div className="flex min-h-screen bg-wheat-0">
+    <div className="flex min-h-screen">
       {/* Sidebar */}
       <aside className="w-64 bg-blue-900 text-white flex flex-col">
         <div className="px-4 py-6">
-          <h2 className="text-2xl font-semibold">{userRole} Panel</h2>
+          <h2 className="text-2xl font-semibold">Admin Panel</h2>
         </div>
         <nav className="flex-1 px-2 py-4">
           <ul className="space-y-2">
@@ -49,20 +61,19 @@ const AdminLayout = ({ children, userRole }) => {
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1  flex flex-col">
         {/* Header */}
-        <header className="bg-grey-0 shadow p-4 flex justify-between items-center">
+        <header className="bg-white shadow p-4 border-b-2 border-black flex justify-between items-center">
           <h1 className="text-xl font-semibold">Dashboard</h1>
           <div className="flex items-center space-x-4">
-            <span className="text-gray-600">{userRole}</span>
-            <button className="bg-blue-600 text-white py-2 px-4 rounded">
+            <button onClick={handleLogout} className="bg-blue-600 text-white py-2 px-4 rounded">
               Logout
             </button>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 p-6 bg-wheat-0">{children}</main>
+        <main className="flex-1 p-6 bg-white">{children}</main>
       </div>
     </div>
   );

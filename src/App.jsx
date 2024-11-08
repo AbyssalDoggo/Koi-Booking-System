@@ -12,7 +12,6 @@ import UserBookings from "./pages/Customer/Trip/Schedule.jsx";
 import KoiList from "./pages/Customer/Koi/KoiList.jsx";
 import KoiCart from "./pages/Customer/Koi/KoiCart.jsx";
 import KoiDetail from "./pages/Customer/Koi/KoiDetail.jsx";
-import AdminUser from "./Pages/AdminPage/UsersManager.tsx";
 const App = () => {
   return (
     <Routes>

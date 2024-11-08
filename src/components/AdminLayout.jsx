@@ -19,6 +19,7 @@ const AdminLayout = ({ children, userRole }) => {
     1: [
       { href: "/trips", label: "Trip" },
       { href: "/schedule", label: "Schedule" },
+      { href: "/koi", label: "Koi Fish" },
     ],
   };
 

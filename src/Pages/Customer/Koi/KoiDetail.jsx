@@ -1,27 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import img from "../assets/Koi1.png";
+import img from "../../../assets/Koi1.png";
 
-export interface KoiFish {
-  KoiFishId: number;
-  KoiFishVarietyId: number;
-  FarmId: number;
-  Weight: number;
-  Length: number;
-  Color: string | null;
-  Price: number;
-  DateAdded: string | null;
-  IsAvailable: boolean | null;
-  Notes: string | null;
-  Supplier: string | null;
-  Gender: number;
-  Farm: any;
-  KoiFishVariety: any;
-}
-
-const KoiDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [koi, setKoi] = useState<KoiFish | null>(null);
+const KoiDetail = () => {
+  const { id } = useParams();
+  const [koi, setKoi] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,7 +18,9 @@ const KoiDetail: React.FC = () => {
         }
         const data = await response.json();
         setKoi(data.Data);
-      } catch (err) {}
+      } catch (err) {
+        console.error("Error fetching Koi fish data:", err);
+      }
     };
 
     fetchKoiDetail();

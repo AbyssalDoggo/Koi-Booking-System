@@ -12,9 +12,13 @@ const UserBookings = () => {
     fetchUserBookings();
   }, []);
 
+  const userId = localStorage.getItem("userId");
+
   const fetchUserBookings = async () => {
     try {
-      const response = await fetch("/api/ordertrips/my-bookings");
+      const response = await fetch(
+        `https://localhost:7043/api/OrderTrips/${userId}`
+      );
       if (!response.ok) throw new Error("Failed to fetch bookings");
       const data = await response.json();
       setBookings(data);

@@ -9,6 +9,8 @@ import TripDetail from "./pages/Customer/Trip/TripDetail.jsx";
 import BookingForm from "./pages/Customer/Trip/BookingForm.jsx";
 import SalesManagement from "./pages/Sales Staff/SalesManagement.jsx";
 import UserBookings from "./pages/Customer/Trip/Schedule.jsx";
+import KoiList from "./pages/Customer/Koi/KoiList.jsx";
+import KoiDetail from "./pages/Customer/Koi/KoiDetail.jsx";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
       <Route path="/book" element={<BookingForm />} />
       <Route path="/sales" element={<SalesManagement />} />
       <Route path="/schedule" element={<UserBookings />} />
+      <Route path="/koi" element={<KoiList />} />
+      <Route path="/koi/:id" element={<KoiDetail />} />
 
       {/* <Route
         path="/customer"

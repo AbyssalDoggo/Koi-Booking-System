@@ -26,6 +26,13 @@ const TripDetail = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price);
+  };
+
   if (!trip) return null;
 
   return (
@@ -67,12 +74,12 @@ const TripDetail = () => {
                     <p className="text-gray-600">Duration</p>
                     <p className="font-medium">{trip.Duration}</p>
                   </div>
-                  {/* <div>
+                  <div>
                     <p className="text-gray-600">Price</p>
                     <p className="text-2xl font-bold text-blue-600">
                       {formatPrice(trip.Price)}
                     </p>
-                  </div> */}
+                  </div>
                   <div>
                     <p className="text-gray-600">Transportation</p>
                     <p className="font-medium">{trip.Transportation}</p>

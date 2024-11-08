@@ -36,6 +36,12 @@ const TripList = () => {
         return "bg-gray-100 text-gray-800";
     }
   };
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(price);
+  };
 
   return (
     <AdminLayout userRole={userRole}>
@@ -83,9 +89,9 @@ const TripList = () => {
                 </div>
 
                 <div className="mt-4 flex justify-between items-center">
-                  {/* <p className="text-2xl font-bold text-blue-600">
+                  <p className="text-2xl font-bold text-blue-600">
                     {formatPrice(trip.Price)}
-                  </p> */}
+                  </p>
                   {trip.AverageRating && (
                     <div className="flex items-center">
                       <svg

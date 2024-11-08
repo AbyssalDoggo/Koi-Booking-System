@@ -32,10 +32,10 @@ const BookingForm = () => {
       if (!response.ok) throw new Error("Failed to submit booking");
 
       const data = await response.json();
-      alert("Booking submitted successfully!");
+      alert("Request submitted successfully!");
       navigate("/trips");
     } catch (error) {
-      alert("Error submitting booking: " + error.message);
+      alert("Error submitting request: " + error.message);
     } finally {
       setLoading(false);
     }

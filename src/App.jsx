@@ -10,6 +10,7 @@ import BookingForm from "./pages/Customer/Trip/BookingForm.jsx";
 import SalesManagement from "./pages/Sales Staff/SalesManagement.jsx";
 import UserBookings from "./pages/Customer/Trip/Schedule.jsx";
 import KoiList from "./pages/Customer/Koi/KoiList.jsx";
+import KoiCart from "./pages/Customer/Koi/KoiCart.jsx";
 import KoiDetail from "./pages/Customer/Koi/KoiDetail.jsx";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Route path="/schedule" element={<UserBookings />} />
       <Route path="/koi" element={<KoiList />} />
       <Route path="/koi/:id" element={<KoiDetail />} />
+      <Route path="/koiCart" element={<KoiCart />} />
 
       {/* <Route
         path="/customer"

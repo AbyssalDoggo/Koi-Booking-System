@@ -22,7 +22,9 @@ const UserBookingDetails = () => {
 
   const fetchBookingDetails = async () => {
     try {
-      const response = await fetch(`/api/ordertrips/${orderTripId}`);
+      const response = await fetch(
+        `https://localhost:7043/api/ordertrips/${orderTripId}`
+      );
       if (!response.ok) throw new Error("Failed to fetch booking details");
       const data = await response.json();
       setBooking(data);

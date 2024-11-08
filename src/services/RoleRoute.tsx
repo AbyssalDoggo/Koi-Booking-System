@@ -3,7 +3,7 @@ import { Route, Navigate } from "react-router-dom";
 
 const RoleRoute = ({ element, role, ...rest }) => {
   const userRole = localStorage.getItem("userRole");
-  return userRole === role ? element : <Navigate to="/unauthorized" />;
+  return userRole === role ? element : <Navigate to="/" />;
 };
 
 export default RoleRoute;

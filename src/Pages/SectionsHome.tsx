@@ -33,7 +33,7 @@ const SectionsHome = () => {
 
   return (
     <div
-      className="scroll-smooth h-screen overflow-y-scroll snap-y snap-mandatory no-scrollbar"
+      className="scroll-smooth overflow-y-scroll snap-y snap-mandatory no-scrollbar"
       style={{ scrollSnapType: "y mandatory" }}
     >
       <HeroHome ref={(el) => (sectionsRef.current[0] = el)} />

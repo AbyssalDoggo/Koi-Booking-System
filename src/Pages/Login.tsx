@@ -31,6 +31,7 @@ const Login = () => {
       const accessToken = response.data.Token;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("userRole", response.data.User.RoleId);
+      localStorage.setItem("userId", response.data.User.UserId);
       navigate(`/customer`);
     } catch (err) {
       if (axios.isAxiosError(err) && err.response) {

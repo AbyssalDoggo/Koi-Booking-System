@@ -7,10 +7,7 @@ const AdminLayout = ({ children, userRole }) => {
       { href: "/AdminOrderHistory", label: "Order History" },
       { href: "/AdminKoiManager", label: "Koi Fish Manager" },
     ],
-    2: [
-      { href: "/SalesDashboard", label: "Sales Dashboard" },
-      { href: "/OrderHistory", label: "Order History" },
-    ],
+    2: [{ href: "/sales", label: "Manage Requests" }],
     3: [
       { href: "/ConsultingDashboard", label: "Consulting Dashboard" },
       { href: "/ManageClients", label: "Manage Clients" },
@@ -20,9 +17,8 @@ const AdminLayout = ({ children, userRole }) => {
       { href: "/OrderStatus", label: "Order Status" },
     ],
     1: [
-      { href: "/DeliveryDashboard", label: "Profile" },
-      { href: "/OrderStatus", label: "Order" },
       { href: "/trips", label: "Trip" },
+      { href: "/schedule", label: "Schedule" },
     ],
   };
 

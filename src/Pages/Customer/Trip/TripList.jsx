@@ -4,8 +4,6 @@ import AdminLayout from "../../../components/AdminLayout";
 
 const TripList = () => {
   const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const userRole = localStorage.getItem("userRole");
 
@@ -19,22 +17,11 @@ const TripList = () => {
       if (!response.ok) throw new Error("Failed to fetch trips");
       const data = await response.json();
       setTrips(data.Data);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
+    } catch (err) {}
   };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString();
-  };
-
-  const formatPrice = (price) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(price);
   };
 
   const getStatusColor = (status) => {
@@ -50,20 +37,6 @@ const TripList = () => {
     }
   };
 
-  if (loading)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    );
-
   return (
     <AdminLayout userRole={userRole}>
       <div className="container mx-auto px-4 py-8">
@@ -76,7 +49,6 @@ const TripList = () => {
               className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
               onClick={() => navigate(`/trips/${trip.TripId}`)}
             >
-              {/* You can add an image here if you have one */}
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <h2 className="text-xl font-semibold">

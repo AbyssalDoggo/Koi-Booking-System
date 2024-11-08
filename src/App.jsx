@@ -3,10 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage.tsx";
 import Register from "./pages/Register.tsx";
 import Login from "./Pages/Login.tsx";
-import PrivateRoute from "./services/PrivateRoute.tsx";
 import Profile from "./pages/Customer/Profile/Profile.jsx";
 import TripList from "./pages/Customer/Trip/TripList.jsx";
 import TripDetail from "./pages/Customer/Trip/TripDetail.jsx";
+import BookingForm from "./pages/Customer/Trip/BookingForm.jsx";
+import SalesManagement from "./pages/Sales Staff/SalesManagement.jsx";
+import UserBookings from "./pages/Customer/Trip/Schedule.jsx";
 
 const App = () => {
   return (
@@ -17,6 +19,9 @@ const App = () => {
       <Route path="/customer" element={<Profile />} />
       <Route path="/trips" element={<TripList />} />
       <Route path="/trips/:id" element={<TripDetail />} />
+      <Route path="/book" element={<BookingForm />} />
+      <Route path="/sales" element={<SalesManagement />} />
+      <Route path="/schedule" element={<UserBookings />} />
 
       {/* <Route
         path="/customer"

@@ -44,14 +44,14 @@ const KoiHome = forwardRef<HTMLDivElement, React.HTMLProps<HTMLDivElement>>(
     return (
       <div
         ref={ref}
-        className="h-screen flex items-center justify-center bg-wheat-0 transition-all duration-1000 ease-in-out snap-start"
+        className=" flex items-center justify-center bg-wheat-0 transition-all duration-1000 ease-in-out snap-start"
       >
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl font-bold text-center text-gray-900 mb-2">
             Koi Fish
           </h1>
           <p
-            className="text-3xl text-center text-gray-600 mb-12 cursor-pointer hover:underline"
+            className="text-3xl text-center text-blue-300 mb-12 cursor-pointer hover:underline"
             onClick={() => navigate("/koi")}
           >
             Visit store

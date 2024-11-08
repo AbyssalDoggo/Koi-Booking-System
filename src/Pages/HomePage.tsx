@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import SectionsHome from "./SectionsHome";
+import Footer from "../components/Footer";
 const HomePage = () => {
   const [token, setToken] = useState("");
 
@@ -16,6 +17,7 @@ const HomePage = () => {
     <>
       <NavigationBar />
       <SectionsHome />
+      <Footer></Footer>
     </>
   );
 };
